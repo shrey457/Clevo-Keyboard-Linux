@@ -1,69 +1,95 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#2d3248"/>
-      <stop offset="100%" stop-color="#181a26"/>
+    <!-- Vibrant App Icon Gradient Background -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5"/>
+      <stop offset="50%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
     </linearGradient>
-    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#388bfd"/>
-      <stop offset="50%" stop-color="#a371f7"/>
-      <stop offset="100%" stop-color="#f778ba"/>
+
+    <!-- Keyboard Chassis Gradient -->
+    <linearGradient id="kbChassis" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
     </linearGradient>
-    <filter id="drop" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.3"/>
+
+    <!-- RGB Underglow Lightbar -->
+    <linearGradient id="rgbGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff007f"/>
+      <stop offset="25%" stop-color="#a855f7"/>
+      <stop offset="50%" stop-color="#38bdf8"/>
+      <stop offset="75%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
+    </linearGradient>
+
+    <!-- Drop shadow for keyboard elevation -->
+    <filter id="elevate" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000000" flood-opacity="0.45"/>
     </filter>
   </defs>
 
-  <!-- App Icon Base Squircle -->
-  <rect x="8" y="8" width="112" height="112" rx="26" fill="url(#bg)" filter="url(#drop)"/>
+  <!-- 1. Vibrant Squircle Background (Indigo to Electric Cyan) -->
+  <rect x="8" y="8" width="112" height="112" rx="26" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle inner glass rim highlight -->
+  <rect x="8" y="8" width="112" height="112" rx="26" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.4"/>
 
-  <!-- Subtle Rim Highlight -->
-  <rect x="8" y="8" width="112" height="112" rx="26" fill="none" stroke="#4a5173" stroke-width="1.5" opacity="0.6"/>
+  <!-- 2. Dark Keyboard Chassis floating on the vibrant base -->
+  <rect x="18" y="23" width="92" height="66" rx="8" fill="url(#kbChassis)" filter="url(#elevate)" stroke="#334155" stroke-width="1.5"/>
 
-  <!-- Laptop Keyboard Base -->
-  <rect x="18" y="28" width="92" height="64" rx="8" fill="#12131c" stroke="#33374d" stroke-width="1.5"/>
+  <!-- 3. RGB Backlight Glow Bed -->
+  <rect x="22" y="27" width="84" height="48" rx="4" fill="url(#rgbGlow)" opacity="0.95"/>
 
-  <!-- Key Matrix Rows -->
-  <!-- Function Row -->
-  <g fill="#212433">
-    <rect x="23" y="33" width="10" height="7" rx="2"/>
-    <rect x="36" y="33" width="10" height="7" rx="2"/>
-    <rect x="49" y="33" width="10" height="7" rx="2"/>
-    <rect x="62" y="33" width="10" height="7" rx="2"/>
-    <rect x="75" y="33" width="10" height="7" rx="2"/>
-    <rect x="88" y="33" width="17" height="7" rx="2"/>
+  <!-- 4. Keycaps Matrix (Dark chiclets with backlight blooming between them) -->
+  <!-- Row 1: Function keys -->
+  <g fill="#182030">
+    <rect x="24.5" y="29.5" width="10" height="6.5" rx="1.5"/>
+    <rect x="37.5" y="29.5" width="10" height="6.5" rx="1.5"/>
+    <rect x="50.5" y="29.5" width="10" height="6.5" rx="1.5"/>
+    <rect x="63.5" y="29.5" width="10" height="6.5" rx="1.5"/>
+    <rect x="76.5" y="29.5" width="10" height="6.5" rx="1.5"/>
+    <rect x="89.5" y="29.5" width="14" height="6.5" rx="1.5"/>
   </g>
 
-  <!-- Number Row -->
-  <g fill="#212433">
-    <rect x="23" y="43" width="12" height="9" rx="2.5"/>
-    <rect x="38" y="43" width="10" height="9" rx="2.5"/>
-    <rect x="51" y="43" width="10" height="9" rx="2.5"/>
-    <rect x="64" y="43" width="10" height="9" rx="2.5"/>
-    <rect x="77" y="43" width="10" height="9" rx="2.5"/>
-    <rect x="90" y="43" width="15" height="9" rx="2.5"/>
+  <!-- Row 2: Number keys -->
+  <g fill="#182030">
+    <rect x="24.5" y="38.5" width="10.5" height="8" rx="1.8"/>
+    <rect x="37.5" y="38.5" width="10" height="8" rx="1.8"/>
+    <rect x="50.5" y="38.5" width="10" height="8" rx="1.8"/>
+    <rect x="63.5" y="38.5" width="10" height="8" rx="1.8"/>
+    <rect x="76.5" y="38.5" width="10" height="8" rx="1.8"/>
+    <rect x="89.5" y="38.5" width="14" height="8" rx="1.8"/>
   </g>
 
-  <!-- QWERTY Row -->
-  <g fill="#25293d">
-    <rect x="23" y="55" width="14" height="9" rx="2.5"/>
-    <rect x="40" y="55" width="10" height="9" rx="2.5"/>
-    <rect x="53" y="55" width="10" height="9" rx="2.5"/>
-    <rect x="66" y="55" width="10" height="9" rx="2.5"/>
-    <rect x="79" y="55" width="10" height="9" rx="2.5"/>
-    <rect x="92" y="55" width="13" height="9" rx="2.5"/>
+  <!-- Row 3: QWERTY + WASD Keycaps -->
+  <g fill="#182030">
+    <rect x="24.5" y="49" width="12" height="8" rx="1.8"/>
+    <rect x="39" y="49" width="10" height="8" rx="1.8" fill="#243048"/>
+    <rect x="51.5" y="49" width="10" height="8" rx="1.8" fill="#243048"/>
+    <rect x="64" y="49" width="10" height="8" rx="1.8" fill="#243048"/>
+    <rect x="76.5" y="49" width="10" height="8" rx="1.8" fill="#243048"/>
+    <rect x="89" y="49" width="14.5" height="8" rx="1.8"/>
   </g>
+  <!-- WASD neon letters -->
+  <path d="M 42 52.5 L 43.5 55.5 L 45 52.5 L 46.5 55.5 L 48 52.5" stroke="#38bdf8" stroke-width="0.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 54.5 55.5 L 56.5 52.5 L 58.5 55.5 M 55.2 54.5 L 57.8 54.5" stroke="#c084fc" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+  <path d="M 68 52.8 C 67.5 52.5 66.5 52.5 66.5 53.5 C 66.5 54.5 68.5 54.2 68.5 55.2 C 68.5 56 67.5 56.2 66.5 55.8" stroke="#34d399" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+  <path d="M 79.5 52.5 L 79.5 55.5 C 81.5 55.5 83 54.8 83 54 C 83 53.2 81.5 52.5 79.5 52.5 Z" stroke="#fbbf24" stroke-width="0.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Spacebar Row -->
-  <g fill="#25293d">
-    <rect x="23" y="67" width="16" height="9" rx="2.5"/>
-    <rect x="42" y="67" width="44" height="9" rx="2.5" fill="#2d3248"/>
-    <rect x="89" y="67" width="16" height="9" rx="2.5"/>
+  <!-- Row 4: Spacebar & Modifiers -->
+  <g fill="#182030">
+    <rect x="24.5" y="59.5" width="14" height="8.5" rx="1.8"/>
+    <rect x="41" y="59.5" width="45" height="8.5" rx="1.8" fill="#243048"/>
+    <rect x="88.5" y="59.5" width="15" height="8.5" rx="1.8"/>
   </g>
+  <!-- Spacebar illuminated line -->
+  <line x1="47" y1="63.8" x2="80" y2="63.8" stroke="url(#rgbGlow)" stroke-width="1.8" stroke-linecap="round"/>
 
-  <!-- Accent Illumination Line (Underglow) -->
-  <path d="M 23 83 L 105 83" stroke="url(#glow)" stroke-width="3" stroke-linecap="round"/>
+  <!-- 5. Vivid Underglow Light Strip -->
+  <rect x="25" y="79" width="78" height="3.5" rx="1.75" fill="url(#rgbGlow)"/>
 
-  <!-- Trackpad -->
-  <rect x="48" y="98" width="32" height="12" rx="3" fill="#1b1d2a" stroke="#2e334a" stroke-width="1"/>
+  <!-- 6. Floating Modern Glass Trackpad -->
+  <rect x="46" y="95" width="36" height="15" rx="4" fill="#ffffff" opacity="0.25"/>
+  <rect x="46" y="95" width="36" height="15" rx="4" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.45"/>
+  <line x1="64" y1="99" x2="64" y2="106" stroke="#ffffff" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
 </svg>
