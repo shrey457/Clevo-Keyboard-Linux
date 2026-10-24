@@ -4,11 +4,16 @@ CompileFlags:
     - "-fms-extensions"
     - "-mcmodel=kernel"
     - "-mno-red-zone"
-    - "-std=gnu11"
     - "-Wno-unknown-attributes"
+    - "-Wno-unused-variable"
+    - "-Wno-unused-function"
+    - "-xc"
+    - "-std=gnu11"
 Diagnostics:
   UnusedIncludes: None
   Suppress:
     - "unused-includes"
     - "static_assert"
     - "*sizeof(struct filename)*"
+    - "unknown_attributes"
+    - "gnu-variable-sized-type-not-at-end"

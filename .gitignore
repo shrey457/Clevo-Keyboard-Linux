@@ -34,4 +34,6 @@ build/
 dist/
 .cache/
 *.spec.bak
+compile_commands.json
+
 
