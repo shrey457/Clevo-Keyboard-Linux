@@ -61,8 +61,8 @@ Tested and verified on:
 Clone the repository and run the automated installer:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/clevo-keyboard.git
-cd clevo-keyboard
+git clone https://github.com/shrey457/Clevo-Keyboard-Linux.git
+cd Clevo-Keyboard-Linux
 sudo ./kb.sh
 ```
 
