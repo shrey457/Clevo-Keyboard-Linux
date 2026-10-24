@@ -19,7 +19,7 @@
 
 ---
 
-## 🌟 Overview
+##  Overview
 
 Modern Linux kernels (starting with 6.2 and completely enforced in Kernel 7.3+) removed legacy ACPI driver interfaces (`struct acpi_driver` and `module_acpi_driver`), breaking existing Clevo/Tuxedo backlight modules across modern distributions such as Ubuntu 26.10+, Fedora 41+, and Arch Linux.
 
@@ -54,7 +54,7 @@ Tested and verified on:
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### 1-Step Automated Installer (Recommended)
 
@@ -77,7 +77,7 @@ The script automatically:
 
 ---
 
-## 📦 Pre-Built Distro Packages
+##  Pre-Built Distro Packages
 
 Pre-compiled packages with complete DKMS sources, desktop integration, udev rules, and icons are available in [`dist_packages/`](dist_packages/):
 
@@ -91,7 +91,7 @@ Pre-compiled packages with complete DKMS sources, desktop integration, udev rule
 
 ---
 
-## ⌨️ Physical Keyboard Shortcuts
+##  Physical Keyboard Shortcuts
 
 The kernel module handles physical function keys directly in kernel space:
 
@@ -104,7 +104,7 @@ The kernel module handles physical function keys directly in kernel space:
 
 ---
 
-## 🖥️ Desktop GUI & In-App Shortcuts
+##  Desktop GUI & In-App Shortcuts
 
 Launch the control center from your application menu (**Clevo Keyboard Backlight**) or via terminal:
 
@@ -127,7 +127,7 @@ When the application window is focused:
 
 ---
 
-## 🛠️ Command Line Interface (CLI)
+##  Command Line Interface (CLI)
 
 The application includes a built-in CLI for scripts, desktop hotkeys, and automated cron schedules:
 
@@ -156,7 +156,7 @@ clevo-keyboard-gui --tray &
 
 ---
 
-## 🔬 Technical Architecture (Kernel 7.3+ Fix)
+##  Technical Architecture (Kernel 7.3+ Fix)
 
 ### The Problem
 Upstream Linux Kernel 7.3 completely removed:
@@ -178,7 +178,7 @@ Attempting to compile previous versions of `tuxedo-keyboard` or `clevo-keyboard`
 
 ---
 
-## 🛡️ Safety & Hardware Adherence
+##  Safety & Hardware Adherence
 
 - **100% Brick-Safe**: Only sends standard color and brightness commands through Linux SysFS nodes (`/sys/class/leds/rgb:kbd_backlight/`).
 - **No Experimental Modes**: Breath mode and unsupported raw registers have been excluded to preserve hardware integrity across all Clevo motherboard revisions.
@@ -186,7 +186,7 @@ Attempting to compile previous versions of `tuxedo-keyboard` or `clevo-keyboard`
 
 ---
 
-## 🧹 Uninstallation
+##  Uninstallation
 
 To cleanly remove the driver and application:
 
@@ -208,7 +208,7 @@ sudo pacman -R tuxedo-keyboard-dkms
 
 ---
 
-## 📄 License & Credits
+##  License & Credits
 
 - Licensed under the **GNU General Public License v2.0** ([LICENSE](LICENSE)).
 - Kernel module core based on TUXEDO Computers GmbH `tuxedo-keyboard`.

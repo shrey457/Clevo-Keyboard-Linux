@@ -439,55 +439,42 @@ if PYQT6_AVAILABLE:
             return QIcon()
 
         def get_monochrome_tray_icon(self):
-            # 1. Native desktop symbolic icon: automatically adapts to KDE/GNOME panel colors
-            if QIcon.hasThemeIcon("input-keyboard-symbolic"):
-                theme_icon = QIcon.fromTheme("input-keyboard-symbolic")
-                if not theme_icon.isNull():
-                    return theme_icon
-
-            # 2. Local SVG with dynamic theme contrast adaptation
-            bundle_dir = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
-            local_paths = [
-                os.path.join(bundle_dir, "clevo-keyboard-tray-symbolic.svg"),
-                os.path.join(os.path.dirname(os.path.abspath(__file__)), "clevo-keyboard-tray-symbolic.svg"),
-                "/usr/share/icons/hicolor/scalable/status/clevo-keyboard-tray-symbolic.svg"
-            ]
-
             pal = self.palette()
             is_dark = pal.color(QPalette.ColorRole.Window).lightness() < 128
-            fg_hex = "#fcfcfc" if is_dark else "#232629"
+            fg_color = QColor(252, 252, 252) if is_dark else QColor(35, 38, 41)
 
-            for p in local_paths:
-                if os.path.exists(p):
-                    try:
-                        with open(p, "r", encoding="utf-8") as f:
-                            content = f.read()
-                        if "color:" in content:
-                            import re
-                            content = re.sub(r'color:\s*#[0-9a-fA-F]{3,6}', f'color: {fg_hex}', content)
-                        import tempfile
-                        with tempfile.NamedTemporaryFile(suffix=".svg", mode="w", delete=False) as tf:
-                            tf.write(content)
-                            tf_path = tf.name
-                        icon = QIcon(tf_path)
-                        if not icon.isNull():
-                            return icon
-                    except Exception:
-                        return QIcon(p)
+            # Generate high-DPI crisp monochrome icon matching panel palette
+            icon = QIcon()
+            for size in [16, 22, 24, 32, 48]:
+                pm = QtGui.QPixmap(size, size)
+                pm.fill(Qt.GlobalColor.transparent)
+                p = QPainter(pm)
+                p.setRenderHint(QPainter.RenderHint.Antialiasing)
+                scale = size / 22.0
+                p.scale(scale, scale)
 
-            # 3. Dynamic QPixmap drawing fallback
-            pm = QtGui.QPixmap(22, 22)
-            pm.fill(Qt.GlobalColor.transparent)
-            painter = QPainter(pm)
-            painter.setRenderHint(QPainter.RenderHint.Antialiasing)
-            painter.setPen(QPen(QColor(fg_hex), 1.5))
-            painter.drawRoundedRect(QRectF(2, 4, 18, 14), 3, 3)
-            painter.drawLine(6, 9, 8, 9)
-            painter.drawLine(10, 9, 12, 9)
-            painter.drawLine(14, 9, 16, 9)
-            painter.drawLine(7, 13, 15, 13)
-            painter.end()
-            return QIcon(pm)
+                # Outer keyboard frame
+                p.setPen(QPen(fg_color, 1.5))
+                p.setBrush(Qt.BrushStyle.NoBrush)
+                p.drawRoundedRect(QRectF(2.0, 4.5, 18.0, 12.0), 2.5, 2.5)
+
+                # Chiclet keys
+                p.setPen(Qt.PenStyle.NoPen)
+                p.setBrush(fg_color)
+                for kx in [4.5, 7.5, 10.5, 13.5, 16.0]:
+                    p.drawRoundedRect(QRectF(kx, 7.0, 1.6, 1.6), 0.4, 0.4)
+                p.drawRoundedRect(QRectF(4.5, 10.5, 2.0, 1.6), 0.4, 0.4)
+                p.drawRoundedRect(QRectF(7.5, 10.5, 7.0, 1.6), 0.5, 0.5)
+                p.drawRoundedRect(QRectF(15.5, 10.5, 2.0, 1.6), 0.4, 0.4)
+
+                # Backlight illumination indicators beneath
+                p.drawEllipse(QRectF(7.2, 18.0, 1.4, 1.4))
+                p.drawEllipse(QRectF(10.3, 18.0, 1.4, 1.4))
+                p.drawEllipse(QRectF(13.4, 18.0, 1.4, 1.4))
+                p.end()
+                icon.addPixmap(pm)
+
+            return icon
 
         def init_ui(self):
             pal = self.palette()
@@ -840,13 +827,21 @@ if PYQT6_AVAILABLE:
                 event.accept()
                 return
 
-            # Escape minimizes / closes to tray
+            # Escape closes and exits app completely
             elif key == Qt.Key.Key_Escape:
-                self.hide()
+                self.close()
                 event.accept()
                 return
 
             super().keyPressEvent(event)
+
+        def closeEvent(self, event):
+            # When window is closed, hide tray icon and quit completely (never run in background)
+            if hasattr(self, "tray") and self.tray:
+                self.tray.hide()
+            QApplication.quit()
+            event.accept()
+
 
 
 # ─── Command Line (CLI) Support ─────────────────────────────────────────────
@@ -914,7 +909,7 @@ def main():
         app = QApplication(sys.argv)
         app.setApplicationName("Clevo Keyboard Backlight")
         app.setOrganizationName("ClevoLinux")
-        app.setQuitOnLastWindowClosed(False)
+        app.setQuitOnLastWindowClosed(True)
 
         backend = SysfsBackend()
         window = ClevoNativeWindow(backend)
