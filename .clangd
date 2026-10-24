@@ -1,0 +1,14 @@
+CompileFlags:
+  CompilationDatabase: "."
+  Add:
+    - "-fms-extensions"
+    - "-mcmodel=kernel"
+    - "-mno-red-zone"
+    - "-std=gnu11"
+    - "-Wno-unknown-attributes"
+Diagnostics:
+  UnusedIncludes: None
+  Suppress:
+    - "unused-includes"
+    - "static_assert"
+    - "*sizeof(struct filename)*"

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Clevo Keyboard Backlight
+GenericName=Keyboard Lighting Control
+Comment=Configure RGB keyboard lighting, colors, and brightness
+Exec=clevo-keyboard-gui
+Icon=clevo-keyboard
+Terminal=false
+Type=Application
+Categories=Settings;HardwareSettings;Utility;Qt;
+Keywords=clevo;tuxedo;keyboard;backlight;rgb;lighting;
+StartupNotify=true

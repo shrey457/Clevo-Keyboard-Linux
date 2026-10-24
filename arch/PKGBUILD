@@ -1,0 +1,62 @@
+# Maintainer: Clevo Linux Contributors
+# Contributor: TUXEDO Computers GmbH <tux@tuxedocomputers.com>
+
+pkgname=tuxedo-keyboard-dkms
+pkgver=3.2.10
+pkgrel=1
+pkgdesc="Driver for Clevo and TUXEDO keyboard, keyboard backlight & general hardware I/O (Kernel 7.3+ compatible)"
+arch=('any')
+url="https://github.com/tuxedocomputers/tuxedo-keyboard"
+license=('GPL3')
+depends=('dkms')
+makedepends=('git')
+provides=('tuxedo_keyboard')
+conflicts=('tuxedo-keyboard')
+install="${pkgname}.install"
+source=("tuxedo-keyboard-${pkgver}.tar.gz::local")
+
+package() {
+  # Install source tree for DKMS
+  local dkms_dir="${pkgdir}/usr/src/tuxedo-keyboard-${pkgver}"
+  mkdir -p "${dkms_dir}"
+  cp -r "${srcdir}"/{Makefile,dkms.conf,src} "${dkms_dir}/"
+
+  # Install module autoload
+  mkdir -p "${pkgdir}/etc/modules-load.d"
+  printf "clevo_acpi\nclevo_wmi\ntuxedo_keyboard\ntuxedo_io\nuniwill_wmi\n" > "${pkgdir}/etc/modules-load.d/tuxedo.conf"
+
+  # Install modprobe config
+  mkdir -p "${pkgdir}/etc/modprobe.d"
+  echo "options tuxedo_keyboard force_load=1" > "${pkgdir}/etc/modprobe.d/tuxedo_keyboard.conf"
+
+  # Install udev rule
+  mkdir -p "${pkgdir}/usr/lib/udev/rules.d"
+  cat << 'EOF' > "${pkgdir}/usr/lib/udev/rules.d/99-clevo-backlight.rules"
+SUBSYSTEM=="leds", KERNEL=="*kbd_backlight*", ACTION=="add", RUN+="/bin/chmod 0666 /sys%p/brightness /sys%p/multi_intensity"
+SUBSYSTEM=="platform", DRIVERS=="clevo_keyboard|tuxedo_keyboard", ACTION=="add", RUN+="/bin/chmod 0666 /sys%p/kbd_backlight_mode"
+EOF
+
+  # Install GUI and icons
+  mkdir -p "${pkgdir}/usr/bin"
+  install -m755 "${srcdir}/clevo-keyboard-gui.py" "${pkgdir}/usr/bin/clevo-keyboard-gui"
+
+  mkdir -p "${pkgdir}/usr/share/icons/hicolor/scalable/apps"
+  install -m644 "${srcdir}/clevo-keyboard.svg" "${pkgdir}/usr/share/icons/hicolor/scalable/apps/clevo-keyboard.svg"
+
+  mkdir -p "${pkgdir}/usr/share/icons/hicolor/scalable/status"
+  install -m644 "${srcdir}/clevo-keyboard-tray-symbolic.svg" "${pkgdir}/usr/share/icons/hicolor/scalable/status/clevo-keyboard-tray-symbolic.svg"
+
+  mkdir -p "${pkgdir}/usr/share/applications"
+  cat << 'EOF' > "${pkgdir}/usr/share/applications/clevo-keyboard-gui.desktop"
+[Desktop Entry]
+Name=Clevo Keyboard Backlight
+GenericName=Keyboard Lighting Control
+Comment=Configure keyboard backlight and 15 standard colors
+Exec=/usr/bin/clevo-keyboard-gui
+Icon=clevo-keyboard
+Terminal=false
+Type=Application
+Categories=Settings;HardwareSettings;Utility;Qt;
+Keywords=clevo;tuxedo;keyboard;backlight;rgb;lighting;
+EOF
+}

@@ -1,0 +1,3 @@
+# Clevo / Tuxedo keyboard backlight SysFS permissions for desktop users
+SUBSYSTEM=="leds", KERNEL=="*kbd_backlight*", ACTION=="add", RUN+="/bin/chmod 0666 /sys%p/brightness /sys%p/multi_intensity"
+SUBSYSTEM=="platform", DRIVERS=="clevo_keyboard|tuxedo_keyboard", ACTION=="add", RUN+="/bin/chmod 0666 /sys%p/kbd_backlight_mode"
