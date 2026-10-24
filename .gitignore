@@ -21,10 +21,14 @@ Mkfile.old
 *.kdev4
 
 # Packaging
-rpm/
-deb/tuxedo-keyboard-*
+/rpm/
+/deb/clevo-keyboard-*
+/deb/tuxedo-keyboard-*
 *.deb
 *.rpm
+!dist_packages/**/*.deb
+!dist_packages/**/*.rpm
+
 
 # Python & Build artifacts
 __pycache__/

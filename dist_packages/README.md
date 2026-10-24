@@ -1,4 +1,4 @@
-# Clevo Keyboard Driver & GUI Packages
+# Clevo Keyboard Driver & GUI Packages (v1.0.0)
 
 Pre-built packages and binaries supporting Linux Kernel 7.3+, GNOME, KDE Plasma, XFCE, and other desktop environments.
 
@@ -6,9 +6,9 @@ Pre-built packages and binaries supporting Linux Kernel 7.3+, GNOME, KDE Plasma,
 
 | Distribution / Target | Package Location | Installation Command |
 |---|---|---|
-| **Ubuntu / Debian / Pop!_OS / Mint** | `dist_packages/deb/tuxedo-keyboard-3.2.10.deb` | `sudo apt install ./dist_packages/deb/tuxedo-keyboard-3.2.10.deb` |
-| **Fedora / RHEL / CentOS** | `dist_packages/rpm/tuxedo-keyboard-3.2.10-1.noarch.rpm` | `sudo dnf install ./dist_packages/rpm/tuxedo-keyboard-3.2.10-1.noarch.rpm` |
-| **openSUSE** | `dist_packages/rpm/tuxedo-keyboard-3.2.10-1.noarch.rpm` | `sudo zypper install ./dist_packages/rpm/tuxedo-keyboard-3.2.10-1.noarch.rpm` |
+| **Ubuntu / Debian / Pop!_OS / Mint** | `dist_packages/deb/clevo-keyboard-1.0.0.deb` | `sudo apt install ./dist_packages/deb/clevo-keyboard-1.0.0.deb` |
+| **Fedora / RHEL / CentOS** | `dist_packages/rpm/clevo-keyboard-1.0.0-1.noarch.rpm` | `sudo dnf install ./dist_packages/rpm/clevo-keyboard-1.0.0-1.noarch.rpm` |
+| **openSUSE** | `dist_packages/rpm/clevo-keyboard-1.0.0-1.noarch.rpm` | `sudo zypper install ./dist_packages/rpm/clevo-keyboard-1.0.0-1.noarch.rpm` |
 | **Arch Linux / Manjaro** | `dist_packages/arch/PKGBUILD` | `cd dist_packages/arch && makepkg -si` |
 | **Any Linux Distro (Universal Binary)** | `dist_packages/standalone/clevo-keyboard-gui` | `./dist_packages/standalone/clevo-keyboard-gui` |
 

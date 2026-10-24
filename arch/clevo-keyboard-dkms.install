@@ -1,5 +1,5 @@
 post_install() {
-  dkms install -m tuxedo-keyboard -v 3.2.10
+  dkms install -m clevo-keyboard -v 1.0.0
   udevadm control --reload-rules >/dev/null 2>&1 || true
   udevadm trigger >/dev/null 2>&1 || true
   gtk-update-icon-cache -q -t -f /usr/share/icons/hicolor >/dev/null 2>&1 || true
@@ -14,5 +14,5 @@ post_upgrade() {
 }
 
 pre_remove() {
-  dkms remove -m tuxedo-keyboard -v 3.2.10 --all >/dev/null 2>&1 || true
+  dkms remove -m clevo-keyboard -v 1.0.0 --all >/dev/null 2>&1 || true
 }

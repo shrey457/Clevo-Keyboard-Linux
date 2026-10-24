@@ -893,6 +893,7 @@ def run_cli(args):
 def main():
     import argparse
     parser = argparse.ArgumentParser(description="Clevo Keyboard Backlight Control (Native Linux)")
+    parser.add_argument("-v", "--version", action="version", version="%(prog)s 1.0.0")
     parser.add_argument("--cli", action="store_true", help="Run in CLI mode")
     parser.add_argument("--color", type=str, help="15 standard colors: blue, red, green, cyan, white, orange, etc.")
     parser.add_argument("--brightness", type=int, help="Brightness (0 - 255)")

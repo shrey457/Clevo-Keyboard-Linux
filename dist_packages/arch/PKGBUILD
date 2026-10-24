@@ -1,23 +1,24 @@
-# Maintainer: Clevo Linux Contributors
-# Contributor: TUXEDO Computers GmbH <tux@tuxedocomputers.com>
+# Maintainer: Shreyash <https://github.com/shrey457/Clevo-Keyboard-Linux>
+# Contributor: Clevo & TUXEDO Linux Contributors
 
-pkgname=tuxedo-keyboard-dkms
-pkgver=3.2.10
+pkgname=clevo-keyboard-dkms
+pkgver=1.0.0
 pkgrel=1
-pkgdesc="Driver for Clevo and TUXEDO keyboard, keyboard backlight & general hardware I/O (Kernel 7.3+ compatible)"
+pkgdesc="Driver and GUI for Clevo and TUXEDO RGB keyboard backlight (Kernel 7.3+ compatible)"
 arch=('any')
-url="https://github.com/tuxedocomputers/tuxedo-keyboard"
-license=('GPL3')
+url="https://github.com/shrey457/Clevo-Keyboard-Linux"
+license=('GPL2')
 depends=('dkms')
+optdepends=('python-pyqt6: Native Qt6 Desktop Control Center')
 makedepends=('git')
-provides=('tuxedo_keyboard')
-conflicts=('tuxedo-keyboard')
+provides=('clevo-keyboard' 'tuxedo-keyboard' 'tuxedo_keyboard')
+conflicts=('tuxedo-keyboard' 'tuxedo-keyboard-dkms')
 install="${pkgname}.install"
-source=("tuxedo-keyboard-${pkgver}.tar.gz::local")
+source=("clevo-keyboard-${pkgver}.tar.gz::local")
 
 package() {
   # Install source tree for DKMS
-  local dkms_dir="${pkgdir}/usr/src/tuxedo-keyboard-${pkgver}"
+  local dkms_dir="${pkgdir}/usr/src/clevo-keyboard-${pkgver}"
   mkdir -p "${dkms_dir}"
   cp -r "${srcdir}"/{Makefile,dkms.conf,src} "${dkms_dir}/"
 

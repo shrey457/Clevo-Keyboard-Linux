@@ -83,9 +83,9 @@ Pre-compiled packages with complete DKMS sources, desktop integration, udev rule
 
 | Distribution / Target | Package | Installation Command |
 |---|---|---|
-| **Ubuntu / Debian / Pop!_OS / Mint** | [tuxedo-keyboard-3.2.10.deb](dist_packages/deb/tuxedo-keyboard-3.2.10.deb) | `sudo apt install ./dist_packages/deb/tuxedo-keyboard-3.2.10.deb` |
-| **Fedora / RHEL / CentOS** | [tuxedo-keyboard-3.2.10-1.noarch.rpm](dist_packages/rpm/tuxedo-keyboard-3.2.10-1.noarch.rpm) | `sudo dnf install ./dist_packages/rpm/tuxedo-keyboard-3.2.10-1.noarch.rpm` |
-| **openSUSE** | [tuxedo-keyboard-3.2.10-1.noarch.rpm](dist_packages/rpm/tuxedo-keyboard-3.2.10-1.noarch.rpm) | `sudo zypper install ./dist_packages/rpm/tuxedo-keyboard-3.2.10-1.noarch.rpm` |
+| **Ubuntu / Debian / Pop!_OS / Mint** | [clevo-keyboard-1.0.0.deb](dist_packages/deb/clevo-keyboard-1.0.0.deb) | `sudo apt install ./dist_packages/deb/clevo-keyboard-1.0.0.deb` |
+| **Fedora / RHEL / CentOS** | [clevo-keyboard-1.0.0-1.noarch.rpm](dist_packages/rpm/clevo-keyboard-1.0.0-1.noarch.rpm) | `sudo dnf install ./dist_packages/rpm/clevo-keyboard-1.0.0-1.noarch.rpm` |
+| **openSUSE** | [clevo-keyboard-1.0.0-1.noarch.rpm](dist_packages/rpm/clevo-keyboard-1.0.0-1.noarch.rpm) | `sudo zypper install ./dist_packages/rpm/clevo-keyboard-1.0.0-1.noarch.rpm` |
 | **Arch Linux / Manjaro** | [PKGBUILD](dist_packages/arch/PKGBUILD) | `cd dist_packages/arch && makepkg -si` |
 | **Universal Standalone Binary** | [clevo-keyboard-gui](dist_packages/standalone/clevo-keyboard-gui) | `./dist_packages/standalone/clevo-keyboard-gui` |
 

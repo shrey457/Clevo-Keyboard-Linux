@@ -12,8 +12,8 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PACKAGE_NAME="tuxedo-keyboard"
-PACKAGE_VER="3.2.10"
+PACKAGE_NAME="$(sed -n 's/^PACKAGE_NAME=["'\'']\?\([^"'\''\n]*\)["'\'']\?/\1/p' "$SCRIPT_DIR/dkms.conf" 2>/dev/null || echo "clevo-keyboard")"
+PACKAGE_VER="$(sed -n 's/^PACKAGE_VERSION=["'\'']\?\([^"'\''\n]*\)["'\'']\?/\1/p' "$SCRIPT_DIR/dkms.conf" 2>/dev/null || echo "1.0.0")"
 DKMS_DEST="/usr/src/${PACKAGE_NAME}-${PACKAGE_VER}"
 
 # ── Uninstall Option ────────────────────────────────────────────────────────
@@ -24,9 +24,10 @@ if [ "$1" == "--uninstall" ] || [ "$1" == "-u" ]; then
   modprobe -r clevo_acpi clevo_wmi tuxedo_io uniwill_wmi 2>/dev/null || true
   modprobe -r tuxedo_keyboard 2>/dev/null || true
   
-  # Remove DKMS module
+  # Remove DKMS module (both current and legacy)
   dkms remove -m "$PACKAGE_NAME" -v "$PACKAGE_VER" --all 2>/dev/null || true
-  rm -rf "$DKMS_DEST"
+  dkms remove -m tuxedo-keyboard -v 3.2.10 --all 2>/dev/null || true
+  rm -rf "$DKMS_DEST" /usr/src/tuxedo-keyboard-3.2.10
   
   # Remove system configurations
   rm -f /etc/modules-load.d/tuxedo.conf
@@ -84,7 +85,8 @@ make -C "$SCRIPT_DIR" clean >/dev/null 2>&1 || true
 # 3. Clean any existing DKMS registrations
 echo "[*] Registering driver with DKMS for kernel auto-updates..."
 dkms remove -m "$PACKAGE_NAME" -v "$PACKAGE_VER" --all 2>/dev/null || true
-rm -rf "$DKMS_DEST"
+dkms remove -m tuxedo-keyboard -v 3.2.10 --all 2>/dev/null || true
+rm -rf "$DKMS_DEST" /usr/src/tuxedo-keyboard-3.2.10
 
 # 4. Copy current patched source tree to /usr/src
 mkdir -p "$DKMS_DEST"
